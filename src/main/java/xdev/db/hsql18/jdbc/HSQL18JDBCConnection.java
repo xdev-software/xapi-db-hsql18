@@ -1,0 +1,93 @@
+/*
+ * SqlEngine Database Adapter HSQL18 - XAPI SqlEngine Database Adapter for HSQL18
+ * Copyright © 2003 XDEV Software (https://xdev.software)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package xdev.db.hsql18.jdbc;
+
+
+
+
+import java.sql.Connection;
+import java.sql.Statement;
+import java.util.Map;
+
+import xdev.db.jdbc.JDBCConnection;
+
+
+public class HSQL18JDBCConnection extends JDBCConnection<HSQL18JDBCDataSource, HSQL18Dbms>
+{
+	public HSQL18JDBCConnection(final HSQL18JDBCDataSource dataSource)
+	{
+		super(dataSource);
+	}
+	
+	
+	@Override
+	public void createTable(
+		final String tableName, final String primaryKey, final Map<String, String> columnMap,
+			final boolean isAutoIncrement, final Map<String, String> foreignKeys) throws Exception
+	{
+		
+		if(!columnMap.containsKey(primaryKey))
+		{
+			columnMap.put(primaryKey,"INTEGER"); //$NON-NLS-1$
+		}
+		StringBuffer createStatement = null;
+		
+		if(isAutoIncrement)
+		{
+			createStatement = new StringBuffer("CREATE TABLE IF NOT EXISTS " + tableName + "(" //$NON-NLS-1$ //$NON-NLS-2$
+					+ primaryKey + " " + columnMap.get(primaryKey) + " IDENTITY NOT NULL,"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		else
+		{
+			createStatement = new StringBuffer("CREATE TABLE IF NOT EXISTS " + tableName + "(" //$NON-NLS-1$ //$NON-NLS-2$
+					+ primaryKey + " " + columnMap.get(primaryKey) + ","); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		
+		for(final String keySet : columnMap.keySet())
+		{
+			if(!keySet.equals(primaryKey))
+			{
+				createStatement.append(keySet + " " + columnMap.get(keySet) + ","); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+		}
+		
+		createStatement.append(" PRIMARY KEY (" + primaryKey + "))"); //$NON-NLS-1$ //$NON-NLS-2$
+		
+		if(log.isDebugEnabled())
+		{
+			log.debug("SQL Statement to create a table: " + createStatement.toString()); //$NON-NLS-1$
+		}
+		
+		final Connection connection = super.getConnection();
+		final Statement statement = connection.createStatement();
+		try
+		{
+			statement.execute(createStatement.toString());
+		}
+		catch(final Exception e)
+		{
+			throw e;
+		}
+		finally
+		{
+			statement.close();
+			connection.close();
+		}
+	}
+	
+}
