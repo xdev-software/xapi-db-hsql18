@@ -2,6 +2,11 @@
 [![Build](https://img.shields.io/github/actions/workflow/status/xdev-software/xapi-db-hsql18/checkBuild.yml?branch=develop)](https://github.com/xdev-software/xapi-db-hsql18/actions/workflows/checkBuild.yml?query=branch%3Adevelop)
 [![javadoc](https://javadoc.io/badge2/com.xdev-software/xapi-db-hsql18/javadoc.svg)](https://javadoc.io/doc/com.xdev-software/xapi-db-hsql18)
 
+> :warning: **Security Warning**: There is a known security issue with version 1.8 of
+> HyperSQL: [Dependabot-Issue](https://github.com/xdev-software/xapi-db-hsql18/security/dependabot/1)
+>
+> If possible, please use [version 2](https://github.com/xdev-software/xapi-db-hsql2) of our connector!
+
 # SqlEngine Database Adapter HyperSQL 1.8
 
 The XDEV Application Framework provides an abstraction over database dialects as part of its SqlEngine. This module is
@@ -17,12 +22,6 @@ This Adapter only works to read from the database. It is **not** possible to per
 - dropColumn
 - createIndex
 - dropIndex
-
-## Security Warning!
-
-There is a known security issue with version 1.8 of
-HyperSQL: https://github.com/xdev-software/xapi-db-hsql18/security/dependabot/1
-If possible, please use version https://github.com/xdev-software/xapi-db-hsql2 of our connector!
 
 ## XDEV-IDE
 
