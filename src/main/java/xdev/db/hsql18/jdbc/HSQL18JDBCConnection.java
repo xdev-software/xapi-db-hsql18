@@ -17,9 +17,6 @@
  */
 package xdev.db.hsql18.jdbc;
 
-
-
-
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.Map;
@@ -34,27 +31,29 @@ public class HSQL18JDBCConnection extends JDBCConnection<HSQL18JDBCDataSource, H
 		super(dataSource);
 	}
 	
-	
 	@Override
 	public void createTable(
 		final String tableName, final String primaryKey, final Map<String, String> columnMap,
-			final boolean isAutoIncrement, final Map<String, String> foreignKeys) throws Exception
+		final boolean isAutoIncrement, final Map<String, String> foreignKeys) throws Exception
 	{
 		
 		if(!columnMap.containsKey(primaryKey))
 		{
-			columnMap.put(primaryKey,"INTEGER"); //$NON-NLS-1$
+			columnMap.put(primaryKey, "INTEGER"); //$NON-NLS-1$
 		}
 		StringBuffer createStatement = null;
 		
 		if(isAutoIncrement)
 		{
-			createStatement = new StringBuffer("CREATE TABLE IF NOT EXISTS " + tableName + "(" //$NON-NLS-1$ //$NON-NLS-2$
-					+ primaryKey + " " + columnMap.get(primaryKey) + " IDENTITY NOT NULL,"); //$NON-NLS-1$ //$NON-NLS-2$
+			createStatement =
+				new StringBuffer("CREATE TABLE IF NOT EXISTS " + tableName + "(" //$NON-NLS-1$ //$NON-NLS-2$
+					+ primaryKey + " " + columnMap.get(primaryKey) + " IDENTITY NOT NULL,"); //$NON-NLS-1$
+			// $NON-NLS-2$
 		}
 		else
 		{
-			createStatement = new StringBuffer("CREATE TABLE IF NOT EXISTS " + tableName + "(" //$NON-NLS-1$ //$NON-NLS-2$
+			createStatement =
+				new StringBuffer("CREATE TABLE IF NOT EXISTS " + tableName + "(" //$NON-NLS-1$ //$NON-NLS-2$
 					+ primaryKey + " " + columnMap.get(primaryKey) + ","); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		
@@ -70,7 +69,7 @@ public class HSQL18JDBCConnection extends JDBCConnection<HSQL18JDBCDataSource, H
 		
 		if(log.isDebugEnabled())
 		{
-			log.debug("SQL Statement to create a table: " + createStatement.toString()); //$NON-NLS-1$
+			log.debug("SQL Statement to create a table: " + createStatement); //$NON-NLS-1$
 		}
 		
 		final Connection connection = super.getConnection();
@@ -89,5 +88,4 @@ public class HSQL18JDBCConnection extends JDBCConnection<HSQL18JDBCDataSource, H
 			connection.close();
 		}
 	}
-	
 }

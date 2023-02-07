@@ -17,9 +17,6 @@
  */
 package xdev.db.hsql18.jdbc;
 
-
-
-
 import com.xdev.jadoth.sqlengine.dbms.standard.StandardDDLMapper;
 
 

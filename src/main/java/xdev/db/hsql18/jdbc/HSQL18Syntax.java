@@ -17,8 +17,6 @@
  */
 package xdev.db.hsql18.jdbc;
 
-
-
 import com.xdev.jadoth.sqlengine.dbms.DbmsSyntax;
 
 
@@ -26,7 +24,6 @@ public class HSQL18Syntax extends DbmsSyntax.Implementation<HSQL18Dbms>
 {
 	protected HSQL18Syntax()
 	{
-		super(wordSet(),wordSet());
+		super(wordSet(), wordSet());
 	}
-	
 }

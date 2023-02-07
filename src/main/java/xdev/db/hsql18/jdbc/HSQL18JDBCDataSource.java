@@ -17,9 +17,6 @@
  */
 package xdev.db.hsql18.jdbc;
 
-
-
-
 import xdev.db.DBException;
 import xdev.db.jdbc.JDBCDataSource;
 
@@ -31,23 +28,21 @@ public class HSQL18JDBCDataSource extends JDBCDataSource<HSQL18JDBCDataSource, H
 		super(new HSQL18Dbms());
 	}
 	
-	
 	@Override
 	public Parameter[] getDefaultParameters()
 	{
-		return new Parameter[]{HOST.clone(),PORT.clone(9001),USERNAME.clone("sa"),PASSWORD.clone(),
-				CATALOG.clone(),URL_EXTENSION.clone(),IS_SERVER_DATASOURCE.clone(),
-				SERVER_URL.clone(),AUTH_KEY.clone()};
+		return new Parameter[]{
+			HOST.clone(), PORT.clone(9001), USERNAME.clone("sa"), PASSWORD.clone(),
+			CATALOG.clone(), URL_EXTENSION.clone(), IS_SERVER_DATASOURCE.clone(),
+			SERVER_URL.clone(), AUTH_KEY.clone()};
 	}
-	
 	
 	@Override
 	protected HSQL18ConnectionInformation getConnectionInformation()
 	{
-		return new HSQL18ConnectionInformation(getHost(),getPort(),getUserName(),getPassword()
-				.getPlainText(),getCatalog(),getUrlExtension(),getDbmsAdaptor());
+		return new HSQL18ConnectionInformation(this.getHost(), this.getPort(), this.getUserName(), this.getPassword()
+			.getPlainText(), this.getCatalog(), this.getUrlExtension(), this.getDbmsAdaptor());
 	}
-	
 	
 	@Override
 	public HSQL18JDBCConnection openConnectionImpl() throws DBException
@@ -55,13 +50,11 @@ public class HSQL18JDBCDataSource extends JDBCDataSource<HSQL18JDBCDataSource, H
 		return new HSQL18JDBCConnection(this);
 	}
 	
-	
 	@Override
 	public HSQL18JDBCMetaData getMetaData() throws DBException
 	{
 		return new HSQL18JDBCMetaData(this);
 	}
-	
 	
 	@Override
 	public boolean canExport()

@@ -17,11 +17,10 @@
  */
 package xdev.db.hsql18.jdbc;
 
-
-
-
 import com.xdev.jadoth.sqlengine.dbms.DbmsConnectionInformation;
+
 import xdev.db.ConnectionInformation;
+
 
 public class HSQL18ConnectionInformation extends ConnectionInformation<HSQL18Dbms>
 {
@@ -31,32 +30,28 @@ public class HSQL18ConnectionInformation extends ConnectionInformation<HSQL18Dbm
 	
 	/**
 	 * Instantiates a new hsql18 connection information.
-	 * 
-	 * @param user
-	 *            the user
-	 * @param password
-	 *            the password
-	 * @param database
-	 *            the database
-	 * @param urlExtension
-	 *            the extended url properties
-	 * @param dbmsAdaptor
-	 *            the dbms adaptor
+	 *
+	 * @param user         the user
+	 * @param password     the password
+	 * @param database     the database
+	 * @param urlExtension the extended url properties
+	 * @param dbmsAdaptor  the dbms adaptor
 	 */
-	public HSQL18ConnectionInformation(final String host, final int port, final String user,
-			final String password, final String database, final String urlExtension,
-			final HSQL18Dbms dbmsAdaptor)
+	public HSQL18ConnectionInformation(
+		final String host, final int port, final String user,
+		final String password, final String database, final String urlExtension,
+		final HSQL18Dbms dbmsAdaptor)
 	{
-		super(host,port,user,password,database,urlExtension,dbmsAdaptor);
+		super(host, port, user, password, database, urlExtension, dbmsAdaptor);
 	}
-	
 	
 	// /////////////////////////////////////////////////////////////////////////
 	// getters //
 	// ///////////////////
+	
 	/**
 	 * Gets the database.
-	 * 
+	 *
 	 * @return the database
 	 */
 	public String getDatabase()
@@ -64,35 +59,33 @@ public class HSQL18ConnectionInformation extends ConnectionInformation<HSQL18Dbm
 		return this.getCatalog();
 	}
 	
-	
 	// /////////////////////////////////////////////////////////////////////////
 	// setters //
 	// ///////////////////
+	
 	/**
 	 * Sets the database.
-	 * 
-	 * @param database
-	 *            the database to set
+	 *
+	 * @param database the database to set
 	 */
 	public void setDatabase(final String database)
 	{
 		this.setCatalog(database);
 	}
 	
-	
 	// /////////////////////////////////////////////////////////////////////////
 	// override methods //
 	// ///////////////////
+	
 	/**
 	 * @see DbmsConnectionInformation#createJdbcConnectionUrl()
 	 */
 	@Override
 	public String createJdbcConnectionUrl()
 	{
-		String url = "jdbc:hsqldb:hsql://" + getHost() + ":" + getPort() + "/" + getCatalog();
-		return appendUrlExtension(url);
+		final String url = "jdbc:hsqldb:hsql://" + this.getHost() + ":" + this.getPort() + "/" + this.getCatalog();
+		return this.appendUrlExtension(url);
 	}
-	
 	
 	/**
 	 * @see DbmsConnectionInformation#getJdbcDriverClassName()
@@ -102,5 +95,4 @@ public class HSQL18ConnectionInformation extends ConnectionInformation<HSQL18Dbm
 	{
 		return "org.hsqldb.jdbcDriver";
 	}
-	
 }

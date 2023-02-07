@@ -17,22 +17,17 @@
  */
 package xdev.db.hsql18.jdbc;
 
-
-
-
 import java.sql.SQLException;
 
 import com.xdev.jadoth.sqlengine.dbms.SQLExceptionParser;
 import com.xdev.jadoth.sqlengine.exceptions.SQLEngineException;
 
 
-
 public class HSQL18ExceptionParser implements SQLExceptionParser
 {
 	@Override
-	public SQLEngineException parseSQLException(SQLException e)
+	public SQLEngineException parseSQLException(final SQLException e)
 	{
 		return new SQLEngineException(e);
 	}
-	
 }

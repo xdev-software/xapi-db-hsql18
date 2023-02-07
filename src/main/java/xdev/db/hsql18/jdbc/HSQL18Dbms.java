@@ -17,28 +17,27 @@
  */
 package xdev.db.hsql18.jdbc;
 
-
-
 import com.xdev.jadoth.sqlengine.dbms.DbmsAdaptor;
 import com.xdev.jadoth.sqlengine.dbms.SQLExceptionParser;
 import com.xdev.jadoth.sqlengine.internal.DatabaseGateway;
 import com.xdev.jadoth.sqlengine.internal.tables.SqlTableIdentity;
 
+
 public class HSQL18Dbms
-		extends
-		DbmsAdaptor.Implementation<HSQL18Dbms, HSQL18DMLAssembler, HSQL18DDLMapper, HSQL18RetrospectionAccessor, HSQL18Syntax>
+	extends
+	DbmsAdaptor.Implementation<HSQL18Dbms, HSQL18DMLAssembler, HSQL18DDLMapper, HSQL18RetrospectionAccessor,
+		HSQL18Syntax>
 {
 	// /////////////////////////////////////////////////////////////////////////
 	// constants //
 	// ///////////////////
 	
-	/** The Constant MAX_VARCHAR_LENGTH. */
-	protected static final int			MAX_VARCHAR_LENGTH		= Integer.MAX_VALUE;
-	
-	protected static final char			IDENTIFIER_DELIMITER	= '"';
-	
-	public static final HSQL18Syntax	SYNTAX					= new HSQL18Syntax();
-	
+	public static final HSQL18Syntax SYNTAX = new HSQL18Syntax();
+	/**
+	 * The Constant MAX_VARCHAR_LENGTH.
+	 */
+	protected static final int MAX_VARCHAR_LENGTH = Integer.MAX_VALUE;
+	protected static final char IDENTIFIER_DELIMITER = '"';
 	
 	// /////////////////////////////////////////////////////////////////////////
 	// constructors //
@@ -49,34 +48,30 @@ public class HSQL18Dbms
 		this(new SQLExceptionParser.Body());
 	}
 	
-	
 	/**
-	 * @param sqlExceptionParser
-	 *            the sql exception parser
+	 * @param sqlExceptionParser the sql exception parser
 	 */
 	public HSQL18Dbms(final SQLExceptionParser sqlExceptionParser)
 	{
-		super(sqlExceptionParser,false);
+		super(sqlExceptionParser, false);
 		this.setRetrospectionAccessor(new HSQL18RetrospectionAccessor(this));
 		this.setDMLAssembler(new HSQL18DMLAssembler(this));
 		this.setSyntax(SYNTAX);
 	}
 	
-	
 	/**
 	 * @see DbmsAdaptor#createConnectionInformation(String, int, String, String, String, String)
 	 */
 	@Override
-	public HSQL18ConnectionInformation createConnectionInformation(final String host,
-			final int port, final String user, final String password, final String catalog, final String properties)
+	public HSQL18ConnectionInformation createConnectionInformation(
+		final String host,
+		final int port, final String user, final String password, final String catalog, final String properties)
 	{
-		return new HSQL18ConnectionInformation(host,port,user,password,catalog,properties, this);
+		return new HSQL18ConnectionInformation(host, port, user, password, catalog, properties, this);
 	}
 	
-	
 	/**
-	 * HSQL does not support any means of calculating table columns selectivity
-	 * as far as it is known.
+	 * HSQL does not support any means of calculating table columns selectivity as far as it is known.
 	 */
 	@Override
 	public Object updateSelectivity(final SqlTableIdentity table)
@@ -84,17 +79,14 @@ public class HSQL18Dbms
 		return null;
 	}
 	
-	
 	/**
-
-	 * @see DbmsAdaptor#assembleTransformBytes(byte[],StringBuilder)
+	 * @see DbmsAdaptor#assembleTransformBytes(byte[], StringBuilder)
 	 */
 	@Override
 	public StringBuilder assembleTransformBytes(final byte[] bytes, final StringBuilder sb)
 	{
 		return null;
 	}
-	
 	
 	/**
 	 * @see DbmsAdaptor.Implementation#getRetrospectionAccessor()
@@ -105,7 +97,6 @@ public class HSQL18Dbms
 		throw new RuntimeException("HSQL Retrospection not implemented yet!");
 	}
 	
-	
 	/**
 	 * @see DbmsAdaptor#initialize(DatabaseGateway)
 	 */
@@ -113,7 +104,6 @@ public class HSQL18Dbms
 	public void initialize(final DatabaseGateway<HSQL18Dbms> dbc)
 	{
 	}
-	
 	
 	/**
 	 * @see DbmsAdaptor#rebuildAllIndices(String)
@@ -124,13 +114,11 @@ public class HSQL18Dbms
 		return null;
 	}
 	
-	
 	@Override
 	public boolean supportsOFFSET_ROWS()
 	{
 		return true;
 	}
-	
 	
 	/**
 	 * @see DbmsAdaptor#getMaxVARCHARlength()
@@ -140,7 +128,6 @@ public class HSQL18Dbms
 	{
 		return MAX_VARCHAR_LENGTH;
 	}
-	
 	
 	@Override
 	public char getIdentifierDelimiter()
