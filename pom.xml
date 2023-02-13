@@ -6,7 +6,7 @@
 
     <groupId>com.xdev-software</groupId>
     <artifactId>xapi-db-hsql18</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>SqlEngine Database Adapter HSQL18</name>
